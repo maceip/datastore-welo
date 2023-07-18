@@ -1,5 +1,5 @@
 import { decode } from "@ipld/dag-cbor";
-import { BaseDatastore } from "datastore-core";
+import { BaseDatastore, Errors } from "datastore-core";
 import type { Key, Pair, Query, KeyQuery } from "interface-datastore";
 import type { AwaitIterable, AbortOptions } from "interface-store";
 import type { Database, Keyvalue } from "welo";
@@ -31,8 +31,13 @@ export class DatastoreWelo extends BaseDatastore {
 
 	async get (key: Key): Promise<Uint8Array> {
 		const index = await this.database.store.latest();
+		const value = await this.database.store.selectors.get(index)(key.toString());
 
-		return await this.database.store.selectors.get(index)(key.toString()) as Uint8Array;
+		if (value == null || !(value instanceof Uint8Array)) {
+			throw Errors.notFoundError();
+		}
+
+		return value as Uint8Array;
 	}
 
 	async put (key: Key, value: Uint8Array): Promise<Key> {
