@@ -2,6 +2,7 @@ import { Welo, Database, createWelo } from "welo";
 import { createHelia } from "helia";
 import { interfaceDatastoreTests } from "interface-datastore-tests";
 import { DatastoreWelo, KeyvalueDB } from "../src/index.js";
+import { before, after } from "mocha";
 import type { Helia } from "@helia/interface";
 import type { Libp2p } from "@libp2p/interface-libp2p";
 import type { PubSub } from "@libp2p/interface-pubsub";
@@ -28,7 +29,7 @@ describe("DatastoreWelo", () => {
 
 				database = await welo.open(manifest);
 
-				return new DatastoreWelo(database as KeyvalueDB)
+				return new DatastoreWelo(database as KeyvalueDB);
 			},
 
 			async teardown () {
