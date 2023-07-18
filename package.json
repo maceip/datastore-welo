@@ -1,0 +1,21 @@
+{
+  "type": "module",
+  "name": "datastore-welo",
+  "version": "0.1.0",
+  "description": "Datastore implementation with a Welo backend.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "mkdir -p dist && touch dist/cleanup && rm dist/* && tsc -b",
+    "lint": "eslint ./src/* ./test/*",
+    "prepublishOnly": "npm run build"
+  },
+  "author": "Saul Boyd",
+  "license": "GPL-3.0-or-later",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.42.1",
+    "@typescript-eslint/parser": "^5.42.1",
+    "eslint": "^8.29.0",
+    "typescript": "^4.8.4"
+  }
+}
