@@ -4,7 +4,9 @@ import type { Key, Pair, Query, KeyQuery } from "interface-datastore";
 import type { AwaitIterable, AbortOptions } from "interface-store";
 import type { Database, Keyvalue } from "welo";
 
-type KeyvalueDB = Omit<Database, "store"> & { store: Keyvalue }
+export interface KeyvalueDB extends Database {
+	store: Keyvalue
+}
 
 export class DatastoreWelo extends BaseDatastore {
 	protected readonly database: KeyvalueDB;
